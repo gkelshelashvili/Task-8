@@ -68,7 +68,8 @@ let activeUser = {
     detailes: {
         age: 16,
         address: {
-            city: 'Tbilisi'
+            city: 'Tbilisi',
+            street: 'Surguladze'
         }
     }
 }
