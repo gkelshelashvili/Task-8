@@ -1,31 +1,11 @@
 function power(base, exponent) {
-    if (exponent == 0)return 1;
+    if (exponent == 0)return 1
+
     return base * power(base, exponent - 1);
 }
   
 console.log(power(5,3));
 
-const getPosts = async () => {
-    try {
-        const raw_posts = await fetch('https://jsonplaceholder.typicode.com/posts')
-
-        if(!raw_posts) {
-            throw Error('Problme while getting posts')
-        }
-
-        const posts = await raw_posts.json()
-        posts.forEach(element => {
-            return creatPost(element)
-        });
-
-
-
-        } catch (error) {
-        
-    }
-}
-
-getPosts()
 const creatPost = (element) => {
     //wrapper
     const wrapper = document.createElement('div')
@@ -58,3 +38,54 @@ const creatPost = (element) => {
 
     return document.body.append(wrapper)
 }
+
+const getPosts = async () => {
+    try {
+        const raw_posts = await fetch('https://jsonplaceholder.typicode.com/posts')
+
+        if(!raw_posts) {
+            throw Error('Problme while getting posts')
+        }
+
+        const posts = await raw_posts.json()
+        posts.forEach(element => {
+            return creatPost(element)
+        });
+
+
+
+        } catch (error) {
+        
+    }
+}
+
+getPosts()
+
+//deepcopy
+let activeUser = {
+    name: 'Giorgi',
+    lastName: 'Keshelashvili',
+    detailes: {
+        age: 16,
+        address: {
+            city: 'Tbilisi'
+        }
+    }
+}
+
+function deepcopy (obj){
+    const clone = new Promise ((reject,resolve) => {
+        if(typeof obj !== 'object') {
+            reject('this cannot be cloned')
+        }
+        else {
+            const deepCopy = JSON.parse(JSON.stringify(obj))
+            resolve(deepCopy)
+        }
+    })    
+    return clone 
+}
+
+deepcopy(activeUser)
+    .then((resp) => console.log('this is cloned:',resp))
+    .catch((err) => console.log(err))
